@@ -23,15 +23,15 @@
                         <%=link_to "Your Trips", "#", class:"dropdown-item"%>
                         <div class="dropdown-divider"></div>
                         <%=link_to "Edit Profile", "#", class:"dropdown-item"%>
-                        <%=link_to "Log Out", "#", method:'delete', class:"dropdown-item"%>
+                        <%=link_to "Log Out", destroy_user_session_path , method:'delete', class:"dropdown-item"%>
                     </div>
                 </div>
             <% else %>
                 <li class="nav-item">
-                    <%=link_to "Login", "#", class:"nav-link" %>
+                    <%=link_to "Login", new_user_session_path, class:"nav-link" %>
                 </li>
                 <li class="nav-item active">
-                    <%= link_to "Signup", "#", class:"nav-link" %>
+                    <%= link_to "Signup", new_user_registration_path, class:"nav-link" %>
                 </li>
             <% end %>
         </ul>  
