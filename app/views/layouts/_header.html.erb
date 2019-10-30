@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-light border-bottom ">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <%=link_to "Sirbnb", "root_url", class:"navbar-brand" %>
+    <div class="active-purple-4 nav-item">
+        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto"></ul>
+        <%= link_to "Become a host","#", class:"btn btn-warning mr-3"%>
+        <ul class="navbar-nav mt-2 mt-lg-0">
+            <% if user_signed_in? %>
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <%= image_tag('me.jpg',alt:"logo", size:"25", class:"mr-2 rounded-circle") %><%= current_user.email %>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <%=link_to "Manage Listing", "#", class:"dropdown-item"%>
+                        <%=link_to "List Your Space", "#", class:"dropdown-item"%>
+                        <%=link_to "Your Reservation", "#", class:"dropdown-item"%>
+                        <%=link_to "Your Trips", "#", class:"dropdown-item"%>
+                        <div class="dropdown-divider"></div>
+                        <%=link_to "Edit Profile", "#", class:"dropdown-item"%>
+                        <%=link_to "Log Out", "#", method:'delete', class:"dropdown-item"%>
+                    </div>
+                </div>
+            <% else %>
+                <li class="nav-item">
+                    <%=link_to "Login", "#", class:"nav-link" %>
+                </li>
+                <li class="nav-item active">
+                    <%= link_to "Signup", "#", class:"nav-link" %>
+                </li>
+            <% end %>
+        </ul>  
+    </div>
+</nav>
