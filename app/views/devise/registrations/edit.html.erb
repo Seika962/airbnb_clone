@@ -12,8 +12,7 @@
             <h5 class="card-header">Your Profile</h5>
             <div class="card-body">
                 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-                    <%= render "devise/shared/error_messages", resource: resource %>
-
+                    <%= render "shared/devise_messages" %>
                     <div class="field form-group">
                         <%= f.text_field :fullname, autofocus: true, autocomplete: "fullname", placeholder:current_user.fullname, class:"form-control" %>
                     </div>
