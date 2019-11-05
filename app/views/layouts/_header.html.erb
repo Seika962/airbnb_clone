@@ -14,7 +14,7 @@
             <% if user_signed_in? %>
                 <div class="dropdown">
                     <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <%= image_tag('me.jpg',alt:"logo", size:"25", class:"mr-2 rounded-circle") %><%= current_user.fullname %>
+                    <%= image_tag(avatar_url(current_user),alt:"logo", size:"25", class:"mr-2 rounded-circle") %><%= current_user.fullname %>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <%=link_to "Manage Listing", "#", class:"dropdown-item"%>

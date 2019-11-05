@@ -28,7 +28,7 @@
     <div class="border"></div>
 
     <div class="actions form-group">
-        <%= f.submit "Sign in with facebook", class:"btn btn-light form-control my-3" %>
+        <%= link_to "Sign in with facebook",user_facebook_omniauth_authorize_path, class:"btn btn-light form-control my-3" %>
     </div>
 <% end %>
 
