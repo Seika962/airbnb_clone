@@ -1,30 +1,30 @@
 <div class="card bg-light ml-4">
     <h5 class="card-header">Create your beautiful place</h5>
     <%=form_for(@room) do |f|%>
-        <div class="card-body row">
-            <div class="form-group col-4">
-                <%= f.label :home_type, "Home Type"%> <br>
-                <%= f.select :home_type, [["Apartment"],["House"],["Bed + Breakfast"]], {}, class:"form-control form-control-lg" %>
-            </div>
-            <div class="form-group col-4">
-                <%= f.label :room_type, "Room Type" %> <br>
-                <%= f.select :room_type,[["Entire"],["Private"],["Shared"]], {}, class:"form-control form-control-lg"%>
-            </div>
-            <div class="form-group col-4">
-                <%= f.label :guest_count, "Accomodate" %> <br>
-                <%= f.select :guest_count,[["1"],["2"],["3"],["4+"]], {}, class:"form-control form-control-lg"%>
-            </div>
-            <div class="form-group col-4">
-                <%= f.label :bedroom_count, "Bedrooms" %> <br>
-                <%= f.select :bedroom_count,[["1"],["2"],["3"],["4+"]], {}, class:"form-control form-control-lg"%>
-            </div>
-            <div class="form-group col-4">
-                <%= f.label :bathroom_count, "Bathrooms" %> <br>
-                <%= f.select :bathroom_count,[["1"],["2"],["3"],["4+"]], {}, class:"form-control form-control-lg"%>
-            </div>
+    <div class="card-body row">
+        <div class="form-group col-4">
+            <%= f.label :home_type, "Home Type"%> <br>
+            <%= f.select :home_type, [["Apartment"],["House"],["Bed + Breakfast"]], {}, class:"form-control form-control-lg" %>
         </div>
-        <div>
-            <%= f.submit "Create My Room", class:"btn btn-dark btn-lg d-block mb-4 ml-4 px-5"%>
+        <div class="form-group col-4">
+            <%= f.label :room_type, "Room Type" %> <br>
+            <%= f.select :room_type,[["Entire"],["Private"],["Shared"]], {}, class:"form-control form-control-lg"%>
         </div>
+        <div class="form-group col-4">
+            <%= f.label :guest_count, "Accomodate" %> <br>
+            <%= f.select :guest_count,[["1"],["2"],["3"],["4+"]], {}, class:"form-control form-control-lg"%>
+        </div>
+        <div class="form-group col-4">
+            <%= f.label :bedroom_count, "Bedrooms" %> <br>
+            <%= f.select :bedroom_count,[["1"],["2"],["3"],["4+"]], {}, class:"form-control form-control-lg"%>
+        </div>
+        <div class="form-group col-4">
+            <%= f.label :bathroom_count, "Bathrooms" %> <br>
+            <%= f.select :bathroom_count,[["1"],["2"],["3"],["4+"]], {}, class:"form-control form-control-lg"%>
+        </div>
+    </div>
+    <div>
+        <%= f.submit "Create My Room", class:"btn btn-dark btn-lg d-block mb-4 ml-4 px-5"%>
+    </div>
     <% end %>
 </div>
