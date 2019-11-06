@@ -14,6 +14,7 @@ class RoomsController < ApplicationController
   end
 
   def listing
+    @room = current_user.rooms.find(params[:id])
   end
 
   private
