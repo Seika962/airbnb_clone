@@ -9,7 +9,7 @@
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto"></ul>
-        <%= link_to "Become a host","#", class:"btn btn-warning mr-1"%>
+        <%= link_to "Become a host",new_room_path, class:"btn btn-warning mr-1"%>
         <ul class="navbar-nav mt-2 mt-lg-0">
             <% if user_signed_in? %>
                 <div class="dropdown">
@@ -18,7 +18,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <%=link_to "Manage Listing", "#", class:"dropdown-item"%>
-                        <%=link_to "List Your Space", "#", class:"dropdown-item"%>
+                        <%=link_to "List Your Space", new_room_path, class:"dropdown-item"%>
                         <%=link_to "Your Reservation", "#", class:"dropdown-item"%>
                         <%=link_to "Your Trips", "#", class:"dropdown-item"%>
                         <div class="dropdown-divider"></div>
