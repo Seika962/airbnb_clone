@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   root 'pages#home'
   resources :users, only: [:show]
-  resources :rooms
+  resources :rooms do
+    member do
+      get 'listing','pricing','description','photos','amenities','location'
+    end
+  end
+
   devise_for :users,
               path: '',
               controllers: { registrations: 'registrations', omniauth_callbacks: 'omniauth_callbacks' }
