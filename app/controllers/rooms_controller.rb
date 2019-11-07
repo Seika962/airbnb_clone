@@ -15,6 +15,24 @@ class RoomsController < ApplicationController
     end
   end
 
+  def listing
+  end
+
+  def pricing
+  end
+  
+  def description
+  end
+
+  def photos
+  end
+
+  def amenities
+  end
+
+  def location
+  end
+
   private
   def room_params
     params.require(:room).permit(:home_type,:room_type,:guest_count,:bedroom_count,:bathroom_count)
