@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-3">
+        <%= render "rooms/sidebar" %>
+    </div>
+    <div class="col-9">
+        <div class="card bg-light ml-4">
+            <h5 class="card-header">Listing</h5>
+            <%=form_for(@room) do |f|%>
+                <div class="px-2">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <%= f.label :price, "Price" %> <br>
+                            <%= f.text_field :price, placeholder:"eg:$100", class:"form-control form-control-lg" %>
+                        </div>
+                    <div>
+                        <%= f.submit "Save", class:"btn btn-dark d-block mx-auto my-2 px-5"%>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

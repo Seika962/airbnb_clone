@@ -1,10 +1,10 @@
 <ul class="list-unstyled">
-    <li><h5><%= link_to "Listing", listing_room_path, class:"text-decoration-none text-dark my-5" %></h5></li>
-    <li><h5><%= link_to "Pricing", pricing_room_path, class:"text-decoration-none text-dark my-5" %></h5></li>
-    <li><h5><%= link_to "Description", description_room_path, class:"text-decoration-none text-dark my-5" %></h5></li>
-    <li><h5><%= link_to "Photos", photos_room_path, class:"text-decoration-none text-dark my-5" %></h5></li>
-    <li><h5><%= link_to "Amenities", amenities_room_path, class:"text-decoration-none text-dark my-5" %></h5></li>
-    <li><h5><%= link_to "Location", location_room_path, class:"text-decoration-none text-dark my-5" %></h5></li>
+    <li><h5><%= link_to "Listing", listing_room_path(@room), class:"text-decoration-none text-dark my-5" %></h5></li>
+    <li><h5><%= link_to "Pricing", pricing_room_path(@room), class:"text-decoration-none text-dark my-5" %></h5></li>
+    <li><h5><%= link_to "Description", description_room_path(@room), class:"text-decoration-none text-dark my-5" %></h5></li>
+    <li><h5><%= link_to "Photos", photos_room_path(@room), class:"text-decoration-none text-dark my-5" %></h5></li>
+    <li><h5><%= link_to "Amenities", amenities_room_path(@room), class:"text-decoration-none text-dark my-5" %></h5></li>
+    <li><h5><%= link_to "Location", location_room_path(@room), class:"text-decoration-none text-dark my-5" %></h5></li>
 </ul>
 <div class="border"></div>
 <%= link_to "Publish", "#", class:"btn btn-dark px-5 mt-2"%>

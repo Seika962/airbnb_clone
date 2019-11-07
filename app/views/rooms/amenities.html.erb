@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-3">
+        <%= render "rooms/sidebar" %>
+    </div>
+    <div class="col-9">
+        <div class="card bg-light ml-4">
+            <h5 class="card-header">Amenities</h5>
+            <%=form_for(@room) do |f|%>
+                <div class="px-2">
+                    <div class="card-body row">
+                        <div class="col-3 ml-5 my-3">
+                            <%= f.check_box :has_tv, class:"form-check-input" %>
+                            <%= f.label :has_tv, "TV", class:"d-inline-block form-check-label" %>
+                        </div>
+                        <div class="col-3 ml-5 my-3">
+                            <%= f.check_box :has_kitchen, class:"form-check-input" %>
+                            <%= f.label :has_kitchen, "Kitchen", class:"d-inline-block form-check-label" %>
+                        </div>
+                        <div class="col-3 ml-5 my-3">
+                            <%= f.check_box :has_internet, class:"form-check-input" %>
+                            <%= f.label :has_internet, "Internet", class:"d-inline-block form-check-label" %>
+                        </div>
+                        <div class="col-3 ml-5 my-3">
+                            <%= f.check_box :has_heater, class:"form-check-input" %>
+                            <%= f.label :has_heater, "Heater", class:"d-inline-block form-check-label" %>
+                        </div>
+                        <div class="col-3 ml-5 my-3">
+                            <%= f.check_box :has_aircon, class:"form-check-input" %>
+                            <%= f.label :has_aircon, "Air Conditioning", class:"d-inline-block form-check-label" %>
+                        </div>
+                </div>
+                <div>
+                    <%= f.submit "Save", class:"btn btn-dark d-block mt-2 mb-4 px-5 mx-auto"%>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
