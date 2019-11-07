@@ -10,11 +10,11 @@
                     <div class="card-body">
                         <div class="form-group">
                             <%= f.label :listing_name, "Listing Name" %> <br>
-                            <%= f.text_field :listing_name, placeholder:"What is your listing name", class:"form-control form-control-lg" %>
+                            <%= f.text_field :listing_name, placeholder:"What is your listing name", class:"form-control form-control-lg", required: true %>
                         </div>
                         <div class="form-group">
                             <%= f.label :description, "Summary" %> <br>
-                            <%= f.text_area :description, placeholder:"Summary of your house", class:"form-control form-control-lg" %>
+                            <%= f.text_area :description, placeholder:"Summary of your house", class:"form-control form-control-lg", required: true %>
                         </div>
                     <div>
                         <%= f.submit "Save", class:"btn btn-dark d-block mx-auto my-2 px-5"%>

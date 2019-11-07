@@ -4,23 +4,24 @@
         <div class="card-body row">
             <div class="form-group col-4">
                 <%= f.label :home_type, "Home Type"%> <br>
-                <%= f.select :home_type, [["Apartment"],["House"],["Bed + Breakfast"]], {}, class:"form-control form-control-lg" %>
+                <%= f.select :home_type, [["Select...", ""],["Apartment"],["House"],["Bed + Breakfast"]], {}, class:"form-control form-control-lg" %>
+                <%# if you put two value in [], the first one will be displayed and the second one will be the value, but if you put just one, its gonna be the value. %>
             </div>
             <div class="form-group col-4">
                 <%= f.label :room_type, "Room Type" %> <br>
-                <%= f.select :room_type,[["Entire"],["Private"],["Shared"]], {}, class:"form-control form-control-lg"%>
+                <%= f.select :room_type,[["Select...", ""],["Entire"],["Private"],["Shared"]], {}, class:"form-control form-control-lg"%>
             </div>
             <div class="form-group col-4">
                 <%= f.label :guest_count, "Accomodate" %> <br>
-                <%= f.select :guest_count,[["1"],["2"],["3"],["4+"]], {}, class:"form-control form-control-lg"%>
+                <%= f.select :guest_count,[["Select...", ""],["1"],["2"],["3"],["4+"]], {}, class:"form-control form-control-lg"%>
             </div>
             <div class="form-group col-4">
                 <%= f.label :bedroom_count, "Bedrooms" %> <br>
-                <%= f.select :bedroom_count,[["1"],["2"],["3"],["4+"]], {}, class:"form-control form-control-lg"%>
+                <%= f.select :bedroom_count,[["Select...", ""],["1"],["2"],["3"],["4+"]], {}, class:"form-control form-control-lg"%>
             </div>
             <div class="form-group col-4">
                 <%= f.label :bathroom_count, "Bathrooms" %> <br>
-                <%= f.select :bathroom_count,[["1"],["2"],["3"],["4+"]], {}, class:"form-control form-control-lg"%>
+                <%= f.select :bathroom_count,[["Select...", ""],["1"],["2"],["3"],["4+"]], {}, class:"form-control form-control-lg"%>
             </div>
         </div>
         <div>
