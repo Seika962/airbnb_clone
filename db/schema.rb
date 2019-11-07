@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 2019_11_05_041834) do
 
   create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
+    t.string "listing_name"
     t.integer "address"
     t.text "description"
     t.float "price"

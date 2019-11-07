@@ -2,6 +2,7 @@ class CreateRooms < ActiveRecord::Migration[5.2]
   def change
     create_table :rooms do |t|
       t.integer :user_id
+      t.string :listing_name
       t.integer :address
       t.text :description
       t.float :price
