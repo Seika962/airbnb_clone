@@ -3,13 +3,18 @@
         <%= render "rooms/sidebar" %>
     </div>
     <div class="col-9">
-        <div class="card bg-light ml-4">
+        <div class="card bg-light">
             <h5 class="card-header">Photos</h5>
-            <%=form_for(@room) do |f|%>
+            <%= form_for @room, url: room_photos_path(@room), method: :post, html: {multipart: true} do |f| %>
                 <div class="px-2">
                     <div class="card-body">
                         <div class="text-center">
-                            <%= link_to "Select Photos", "#", class:"btn btn-secondary w-50 my-3" %>
+                            <span class="btn btn-secondary btn-file w-50 my-3">
+                                Select Photos
+                                <%= file_field_tag "images[]", type: :file, multiple: true %>
+                            </span>
+                            <%# creating new button on top of default design and add scss to btn-file which is the class you made  %>
+                            <%# multiple: true allow user to choose many photos at the same time %>
                         </div>
                         <div>
                             <%= f.submit "Add Photos", class:"btn btn-dark d-block my-2 px-4 mx-auto" %>
@@ -17,6 +22,8 @@
                     </div>
                 </div>
             <% end %>
+
+            <%= render "photos/photo_list" %>
         </div>
     </div>
 </div>
