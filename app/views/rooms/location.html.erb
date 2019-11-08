@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <%= f.label :address, "Address" %> <br>
-                            <%= f.text_field :address, placeholder:"What is your address?", class:"form-control form-control-lg" %>
+                            <%= f.text_field :address, placeholder:"What is your address?", class:"form-control form-control-lg",required: true %>
                         </div>
                     <div>
                         <%= f.submit "Save", class:"btn btn-dark d-block mt-4 px-5 mx-auto"%>
