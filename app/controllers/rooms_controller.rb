@@ -37,7 +37,7 @@ class RoomsController < ApplicationController
   def update
     @room = Room.find(params[:id])
     if @room.update(room_params)
-      redirect_to root_url
+      redirect_back(fallback_location: root_url)
       flash[:success] = "Successfully updated!"
     else
       flash[:alert] = "Something went wrong"
