@@ -1,0 +1,9 @@
+<% if @photos %>
+    <div class="container row mx-auto mb-5">
+        <% @photos.each do |photo| %>
+            <div class="card col-3 photo-card border">
+                <%= image_tag photo.image.url, class: "w-100 m-auto" %>
+            </div>
+        <% end %>
+    </div>
+<% end %>

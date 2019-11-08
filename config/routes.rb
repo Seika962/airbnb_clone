@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
   root 'pages#home'
   resources :users, only: [:show]
+
   resources :rooms do
     member do
       get 'listing','pricing','description','photos','amenities','location'
     end
+
+    resources :photos, only: [:create, :destroy]
   end
 
   devise_for :users,

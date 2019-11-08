@@ -5,3 +5,17 @@
   width: 400px;
   height: 400px;
 }
+.btn-file{
+  position: relative;
+
+  input[type="file"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    width: 100%;
+  }
+}
+.photo-card{
+  margin: 15px 32px;
+}
