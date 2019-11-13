@@ -1,2 +1,12 @@
 $("#photos").html("<%= j render 'photo_list' %>");
-<%# after destroying reload the bottom part so you dont have to reload the whole page everytime you delete pic %>
+var val = "<%= @room.photos.blank? %>";
+var ready = "<%= is_ready?(@room) %>";
+
+if (val == "true") {
+    $("#photo-check").hide();
+}
+if (ready == "true") {
+    $("#btn-publish").attr('disabled',false);
+} else {
+    $("#btn-publish").attr('disabled',true);
+}

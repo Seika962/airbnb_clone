@@ -1,10 +1,21 @@
 <ul class="list-unstyled">
-    <li><h5><%= link_to "Listing", listing_room_path(@room), class:"text-decoration-none text-dark my-5" %></h5></li>
-    <li><h5><%= link_to "Pricing", pricing_room_path(@room), class:"text-decoration-none text-dark my-5" %></h5></li>
-    <li><h5><%= link_to "Description", description_room_path(@room), class:"text-decoration-none text-dark my-5" %></h5></li>
-    <li><h5><%= link_to "Photos", photos_room_path(@room), class:"text-decoration-none text-dark my-5" %></h5></li>
-    <li><h5><%= link_to "Amenities", amenities_room_path(@room), class:"text-decoration-none text-dark my-5" %></h5></li>
-    <li><h5><%= link_to "Location", location_room_path(@room), class:"text-decoration-none text-dark my-5" %></h5></li>
+    <li><p><%= link_to "Listing", listing_room_path(@room), class:"text-decoration-none text-dark my-5 font-weight-bold" %><i class="fa fa-check float-right pb-2 text-dark light-check"></i></p></li>
+    <li><p><%= link_to "Pricing", pricing_room_path(@room), class:"text-decoration-none text-dark my-5 font-weight-bold" %><%= is_done?(@room.price)%></p></li>
+    <li><p><%= link_to "Description", description_room_path(@room), class:"text-decoration-none text-dark my-5 font-weight-bold" %><%= is_done?(@room.listing_name && @room.description)%></p></li>
+    <li>
+        <p>
+            <%= link_to "Photos", photos_room_path(@room), class:"text-decoration-none text-dark my-5 font-weight-bold" %>
+            <% unless @room.photos.blank? %>
+                <i id="photo-check" class="fa fa-check float-right pb-2 text-dark"></i>
+            <% end %>
+        </p>
+    </li>
+    <li><p><%= link_to "Amenities", amenities_room_path(@room), class:"text-decoration-none text-dark my-5 font-weight-bold" %><i class="fa fa-check float-right pb-2 text-dark"></i></p></li>
+    <li><p><%= link_to "Location", location_room_path(@room), class:"text-decoration-none text-dark my-5 font-weight-bold" %><%= is_done?(@room.address)%></p></li>
 </ul>
 <div class="border"></div>
-<%= link_to "Publish", "#", class:"btn btn-dark px-5 mt-2"%>
+<%=form_for(@room) do |f|%>
+    <%= f.hidden_field :is_active, value: true %>
+    <%= f.submit "Publish", id: "btn-publish", class:"btn btn-dark px-5 mt-2", disabled: !is_ready?(@room)  %>
+    <%# the button cannot be clicked if the method "is_ready?" was false %>
+<% end %>
