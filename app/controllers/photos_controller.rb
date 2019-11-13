@@ -16,7 +16,6 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
     @room = @photo.room
     @photo.destroy
-
     @photos = Photo.where(room: @room)
     # photos except the one you deleted
 
