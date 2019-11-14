@@ -6,21 +6,21 @@
         <div class="card bg-light">
             <div class="card-header"></div>
             <div class="card-body">
-            <table class="w-100">
-                <% @rooms.each do |room| %>
-                    <tr class="border-bottom">
-                        <td class="w-30 py-2">
-                            <% if room.photos.first %>
-                                <%= image_tag room.photos.first.image.url, size:"100" %>
-                            <% else %>
-                                <%= image_tag "camera-icon.jpg", opt:"photo", size:"100" %>
-                            <% end %>
-                        </td>
-                        <td class="w-50"><p class="font-weight-bold"><%= room.listing_name %></p></td>
-                        <td class="w-20 text-right"><%= link_to "Update", listing_room_path(room), class:"btn btn-dark m-0" %></td>
-                    </tr>
-                <% end %>
-            </table>
+                <table class="w-100">
+                    <% @rooms.each do |room| %>
+                        <tr class="border-bottom">
+                            <td class="w-30 py-2">
+                                <% if room.photos.first %>
+                                    <%= image_tag room.photos.first.image.url, size:"100" %>
+                                <% else %>
+                                    <%= image_tag "camera-icon.jpg", opt:"photo", size:"100" %>
+                                <% end %>
+                            </td>
+                            <td class="w-50"><p class="font-weight-bold"><%= room.listing_name %></p></td>
+                            <td class="w-20 text-right"><%= link_to "Update", listing_room_path(room), class:"btn btn-dark m-0" %></td>
+                        </tr>
+                    <% end %>
+                </table>
             </div>
         </div>
     </div>
