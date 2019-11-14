@@ -29,3 +29,5 @@
 /data
 
 /public/system/photos/images/*
+
+.DS_Store

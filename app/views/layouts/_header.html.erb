@@ -17,7 +17,7 @@
                     <%= image_tag(avatar_url(current_user),alt:"logo", size:"25", class:"mr-2 rounded-circle") %><%= current_user.fullname %>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <%=link_to "Manage Listing", "#", class:"dropdown-item"%>
+                        <%=link_to "Manage Listing", rooms_path, class:"dropdown-item"%>
                         <%=link_to "List Your Space", new_room_path, class:"dropdown-item"%>
                         <%=link_to "Your Reservation", "#", class:"dropdown-item"%>
                         <%=link_to "Your Trips", "#", class:"dropdown-item"%>
