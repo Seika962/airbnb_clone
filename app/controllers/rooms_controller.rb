@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :set_rooms, only: [:listing, :pricing, :description, :photos, :amenities, :location]
+  before_action :set_rooms, only: [:listing, :pricing, :description, :photos, :amenities, :location, :show]
 
   def new
     @room = current_user.rooms.new
@@ -18,6 +18,9 @@ class RoomsController < ApplicationController
 
   def index
     @rooms = current_user.rooms
+  end
+
+  def show
   end
 
   def listing
