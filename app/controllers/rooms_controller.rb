@@ -20,6 +20,10 @@ class RoomsController < ApplicationController
     @rooms = current_user.rooms
   end
 
+  def show
+    @rooms = Room.find(params[:id])
+  end
+
   def listing
   end
 
