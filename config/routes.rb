@@ -8,10 +8,11 @@ Rails.application.routes.draw do
     end
 
     resources :photos, only: [:create, :destroy]
-    resources :reservations, only: [:create]
-    # if we nest like this, parent id(room id) is required everytime we access to children(photos and reservations) 
+    resources :reservations, only: [:create] # if we nest like this, parent id(room id) is required everytime we access to children(photos and reservations) 
   end
 
+  get 'trips', to: 'reservations#trips'
+  get 'reservations', to: 'reservations#reservations'
   devise_for :users,
               path: '',
               controllers: { registrations: 'registrations', omniauth_callbacks: 'omniauth_callbacks' }

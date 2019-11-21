@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-3">
+        <%= render "rooms/listing_sidebar" %>
+    </div>
+    <div class="col-9">
+        <div class="card bg-light">
+            <div class="card-header"></div>
+            <div class="card-body">
+                <table class="w-100">
+                    <% @reservations.each do |reservation| %>
+                        <tr class="border-bottom">
+                            <td><%= reservation.start_date.strftime('%v') %></td>
+                            <td class="w-30 py-2">
+                               <%=image_tag(reservation.room.photos.first.image.url, size:"100") %>
+                            </td>
+                            <td class="w-50 px-3">
+                                <p class="font-weight-bold"><%= reservation.room.listing_name %></p>
+                                <%= image_tag(avatar_url(reservation.room.user),alt:"profile-picture", size:"25", class:"mr-2 rounded-circle") %>
+                                <%= reservation.room.user.fullname %>
+                            </td>
+                            <td class="w-20 text-right"><%= link_to "Review Host", "#", class:"btn btn-dark m-0" %></td>
+                        </tr>
+                    <% end %>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
