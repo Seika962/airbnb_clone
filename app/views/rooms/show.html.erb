@@ -1,13 +1,15 @@
 <div class="row">
         <%= image_tag @room.photos.first.image.url, width:"1100",height:"700",class:"mx-auto" %>
     <div class="col-9 pt-4">
-        <div class="d-inline-block">
-            <h1><%= @room.listing_name %> </h1>
-            <h2><%= @room.address%> </h2>
-        </div>
-        <div class="d-inline-block float-right">
-            <%= image_tag(avatar_url(@room.user),alt:"profile-picture", size:"90", class:"mx-auto rounded-circle") %> <br>
-            <p class="font-weight-bold"><%= @room.user.fullname %></p>
+        <div class="row">
+            <div class="col-10">
+                <h1><%= @room.listing_name %> </h1>
+                <h2><%= @room.address%> </h2>
+            </div>
+            <div class="col-2">
+                <%= image_tag(avatar_url(@room.user),alt:"profile-picture", size:"90", class:"mx-auto rounded-circle") %> <br>
+                <p class="font-weight-bold"><%= @room.user.fullname %></p>
+            </div>
         </div>
         <div class="border mt-5 mb-4"></div>
         <div class="row ml-5">
@@ -91,7 +93,7 @@
                 <p><%= @room.user.fullname %></p>
             </div>
             <div class="d-inline-block ml-4">
-                ★ ★ ★ ★<span class="text-secondary"> ★</span> <br>
+                ★ ★ ★ ★ ★ <br>
                 15-Jul-2019 <br>
                 Very cool host
             </div>
@@ -123,20 +125,152 @@
                 <p class="d-inline-block font-weight-bold float-right">Per Night</p> 
             </div>
             <div class="card-body">
-                <%= form_for(@room) do |f| %>
+                <%= form_for([@room, @room.reservations.new]) do |f| %>
+                <%# not @user because theres no need to specify.its only current user that can reserve room %>
+                <%# theres no new method because we dont need validation so we have to do the same thing as new and create method here %>
+                <%# if its existing object rails will go to update method %>
                     <div class="row">
-                        <div class="col-6 form-group">
-                            <%= f.label :address, "Check-in"%> <br>
-                            <%= f.text_field :address, placeholder:"Start Date", class:"form-control" %>
+                        <div class="col-6 px-0 px-1 form-group">
+                            <%= f.label :start_date, "Check-in" %> <br>
+                            <%= f.text_field :start_date, placeholder:"Start Date", class:"form-control",style:"width:200;" %>
                         </div>
-                        <div class="col-6 form-group">
-                            <%= f.label :address, "Check-out"%> <br>
-                            <%= f.text_field :address, placeholder:"End Date", class:"form-control" %>
+                        <div class="col-6 px-0 px-1 form-group">
+                            <%= f.label :end_date, "Check-out"%> <br>
+                            <%= f.text_field :end_date, placeholder:"End Date", class:"form-control", disabled: true %>
+                            <%# by default this is disabled and it'll be abled only when the user fill out the start_date %>
+                        </div>
+                        <h4><span id="message"></span></h4>
+                        <div id="preview" style="display: none;">
+                            <table class="col-12">
+                                <tbody>
+                                    <tr>
+                                        <td class="col-6 text-left">Price</td>
+                                        <td class="col-6 text-right">$<%= @room.price %></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-6 text-left">Night(s)</td>
+                                        <td class="col-6 text-right">x <span id="reservation-nights"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-6 text-left">Total Price</td>
+                                        <td class="col-6 text-right">$<span id="reservation-total"></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="col-12 form-group">
-                            <%= f.submit "Book Now", class:"form-control btn btn-dark float-center"%>
+                            <%= f.submit "Book Now", id:"btn-book", class:"form-control btn btn-dark float-center", disabled: true %>
                         </div>
                     </div>
+                    <script>
+                        function checkDate(date) {
+                            dmy = date.getDate() + "_" + (date.getMonth() + 1) + "-" + date.getFullYear();
+                            return [$.inArray(dmy, unavailableDates) == -1];
+                        }
+
+                        $(function() {
+                            unavailableDates = []; 
+                            // empty array that is going to be added
+
+                            $.ajax({
+                                url: '<%= preload_room_path(@room) %>',
+                                dataType: 'json',
+                                success: function(data) {
+
+                                    $.each(data, function(arrID, arrValue) {
+                                        for(var d = new Date(arrValue.start_date); d <= new Date(arrValue.end_date); d.setDate(d.getDate() + 1)){
+                                            unavailableDates.push($.datepicker.formatDate('d-m-yy', d));
+                                        }
+                                        // check if the end_date is less than start_date, and as long as its true add 1
+                                        // push means to put the value. it puts the reserved date into unavailableDates in the certain case so that it wont be reserved anymore.
+                                        // do this loop to each reservation so there are each loop( its like nested loop)
+                                    });
+
+                                    $('#reservation_start_date').datepicker({
+                                        dateFormat: 'dd-mm-yy',
+                                        minDate: 0,
+                                        // define minimam range of start date to end date to validate end_date before start_date
+                                        maxDate: '3m',
+                                        beforeShowDay: checkDate,
+                                        // check if the date is available
+                                        onSelect: function(selected){
+                                            $('#reservation_end_date').datepicker("option", "minDate", selected);
+                                            $('#reservation_end_date').attr("disabled", false);
+                                            // to make the disabled (default) false when the start_date is defined
+
+                                            var start_date = $('#reservation_start_date').datepicker('getDate');
+                                            var end_date = $('#reservation_end_date').datepicker('getDate');
+                                            var nights =  (end_date - start_date)/1000/60/60/24 + 1;
+
+                                            var input = {
+                                                'start_date': start_date,
+                                                'end_date': end_date
+                                            }
+
+                                            $.ajax({
+                                                url: '<%= preview_room_path(@room) %>',
+                                                data: input,
+                                                success: function(data){
+                                                    if (data.conflict){
+                                                        $('#message').text("These dates are not available.");
+                                                        $('#preview').hide();
+                                                        $('#btn-book').attr('disabled', true);
+                                                    } else {
+                                                        $('#message').text("");
+                                                        $('#preview').show();
+                                                        $('#btn-book').attr('disabled', false);
+
+                                                        var total = nights * <%= @room.price %>;
+                                                        $('#reservation-nights').text(nights);
+                                                        $('#reservation-total').text(total);
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    });
+
+                                    $('#reservation_end_date').datepicker({
+                                        dateFormat: 'dd-mm-yy',
+                                        minDate: 0,
+                                        maxDate: '3m',
+                                        beforeShowDay: checkDate,
+                                        onSelect: function(selected) {
+                                            $('#reservation_start_date').datepicker("option", "maxDate", selected);
+
+                                            var start_date = $('#reservation_start_date').datepicker('getDate');
+                                            var end_date = $('#reservation_end_date').datepicker('getDate');
+                                            var nights = (end_date - start_date)/1000/60/60/24 + 1;
+
+                                            var input = {
+                                                'start_date': start_date,
+                                                'end_date': end_date
+                                            }
+
+                                            $.ajax({
+                                                url: '<%= preview_room_path(@room) %>',
+                                                data: input,
+                                                success: function(data){
+                                                    if (data.conflict){
+                                                        $('#message').text("These dates are not available.");
+                                                        $('#preview').hide();
+                                                        $('#btn-book').attr('disabled', true);
+                                                    } else {
+                                                        $('#message').text("");
+                                                        $('#preview').show();
+                                                        $('#btn-book').attr('disabled', false);
+
+                                                        var total = nights * <%= @room.price %>;
+                                                        $('#reservation-nights').text(nights);
+                                                        $('#reservation-total').text(total);
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                        });
+                    </script>
                 <% end %>
             </div>
         </div>

@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :set_rooms, only: [:listing, :pricing, :description, :photos, :amenities, :location, :show]
+  before_action :set_rooms, only: [:listing, :pricing, :description, :photos, :amenities, :location, :show, :preload, :preview]
 
   def new
     @room = current_user.rooms.new
@@ -56,6 +56,24 @@ class RoomsController < ApplicationController
     end
   end
 
+  def preload
+    today = Date.today
+    reservations = @room.reservations.where("start_date >= ? OR end_date >= ?", today, today)
+
+    render json: reservations
+  end
+
+  def preview
+    start_date = Date.parse(params[:start_date])
+    end_date = Date.parse(params[:end_date])
+
+    output = {
+      conflict: has_conflict(start_date, end_date, @room)
+    }
+
+    render json: output
+  end
+
   private
   def room_params
     params.require(:room).permit(:home_type,:room_type,:guest_count,:bedroom_count,:bathroom_count,:price,
@@ -64,5 +82,10 @@ class RoomsController < ApplicationController
 
   def set_rooms
     @room = Room.find(params[:id])
+  end
+
+  def has_conflict(start_date, end_date, room)
+    check = room.reservations.where("? < start_date AND end_date < ?", start_date, end_date)
+    check.size > 0 ? true : false
   end
 end
