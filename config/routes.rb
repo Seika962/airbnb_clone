@@ -4,10 +4,12 @@ Rails.application.routes.draw do
 
   resources :rooms do
     member do
-      get 'listing','pricing','description','photos','amenities','location'
+      get 'listing','pricing','description','photos','amenities','location','preload','preview'
     end
 
     resources :photos, only: [:create, :destroy]
+    resources :reservations, only: [:create]
+    # if we nest like this, parent id(room id) is required everytime we access to children(photos and reservations) 
   end
 
   devise_for :users,
