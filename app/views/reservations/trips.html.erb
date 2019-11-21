@@ -11,12 +11,12 @@
                         <tr class="border-bottom">
                             <td><%= reservation.start_date.strftime('%v') %></td>
                             <td class="w-30 py-2">
-                               <%=image_tag(reservation.room.photos.first.image.url, size:"100") %>
+                               <%=link_to image_tag(reservation.room.photos.first.image.url, size:"100"), room_path(reservation.room) %>
                             </td>
                             <td class="w-50 px-3">
-                                <p class="font-weight-bold"><%= reservation.room.listing_name %></p>
+                                <p class="font-weight-bold mb-1"><%= reservation.room.listing_name %></p>
                                 <%= image_tag(avatar_url(reservation.room.user),alt:"profile-picture", size:"25", class:"mr-2 rounded-circle") %>
-                                <%= reservation.room.user.fullname %>
+                                <%= link_to reservation.room.user.fullname, user_path(reservation.room.user), class:"text-decoration-none text-dark" %>
                             </td>
                             <td class="w-20 text-right"><%= link_to "Review Host", "#", class:"btn btn-dark m-0" %></td>
                         </tr>
