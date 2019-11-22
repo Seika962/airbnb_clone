@@ -18,7 +18,7 @@
                                 <%= image_tag(avatar_url(reservation.room.user),alt:"profile-picture", size:"25", class:"mr-2 rounded-circle") %>
                                 <%= link_to reservation.room.user.fullname, user_path(reservation.room.user), class:"text-decoration-none text-dark" %>
                             </td>
-                            <td class="w-20 text-right"><%= link_to "Review Host", "#", class:"btn btn-dark m-0" %></td>
+                            <td class="w-20 text-right"><%= render partial: "reviews/guest_form", locals: {reservation: reservation} %></td>
                         </tr>
                     <% end %>
                 </table>
