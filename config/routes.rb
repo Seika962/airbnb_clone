@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   get 'trips', to: 'reservations#trips'
   get 'reservations', to: 'reservations#reservations'
+  get 'search', to: 'pages#search'
   devise_for :users,
               path: '',
               controllers: { registrations: 'registrations', omniauth_callbacks: 'omniauth_callbacks' }
